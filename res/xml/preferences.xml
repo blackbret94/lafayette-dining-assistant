@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="@string/settings">
+
+        <ListPreference
+                android:key="meal_plan_options"
+                android:title="@string/meal_plan_option_title"
+                android:summary="@string/meal_plan_option_summary" 
+                android:entries="@array/meal_plan_options"
+                android:entryValues="@array/meal_plan_options"
+                android:defaultValue="20"/>
+        
+        <Preference
+            android:title="@string/reset_title"
+            android:summary="@string/reset_summary"
+            android:key="reset_meals">
+        </Preference>
+
+    </PreferenceCategory>
+</PreferenceScreen>
