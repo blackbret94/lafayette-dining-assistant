@@ -1,22 +1,23 @@
 package com.bretblack.lafayettediningassistant;
 
 import java.util.Locale;
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 	private SettingsFragment settingsFragment;
@@ -74,8 +75,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 					.setTabListener(this));
 		}
 		
-		// create settings
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		// create preferences
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		settingsFragment = new SettingsFragment();
 	}
 
@@ -93,6 +94,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -134,7 +137,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			switch(position){
 			case 0:
 				return HomeFragment.newInstance(position + 1);
-			
+			case 1:
+				return InfoFragment.newInstance(position + 1);
 			}
 			return PlaceholderFragment.newInstance(position + 1);
 		}

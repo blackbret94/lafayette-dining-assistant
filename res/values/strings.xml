@@ -13,6 +13,7 @@
     <string name="reset_title">Reset Meals</string>
     <string name="reset_summary">Reset your meals for the week</string>
     <string name="use_a_meal">Use A Meal</string>
+    <string name="remaining_meals">You have 14 meals remaining</string>
     <string-array name="dining_halls">
         <item>Upper Farinon</item>
         <item>Lower Farinon</item>
@@ -26,5 +27,15 @@
         <item>14</item>
         <item>20</item>
 	</string-array>
+	<string name="reset_records_title">Reset Records</string>
+	<string name="reset_records_summary">Reset the recorded venue frequency</string>
+	<string name="schedule_title">Dining Schedule</string>
+	<string name="schedule_content">
+	    Upper Farinon - Open \n 
+	    Lower Farinon - Open \n 
+	    Marquis - Closed \n
+	    Gilbert\'s - Closed  \n
+	    Simon\'s - Open \n 
+	    Skillman Cafe - Open</string>
 
 </resources>

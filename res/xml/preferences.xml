@@ -18,6 +18,12 @@
             android:summary="@string/reset_summary"
             android:key="reset_meals">
         </Preference>
+        
+        <Preference
+            android:title="@string/reset_records_title"
+            android:summary="@string/reset_records_summary"
+            android:key="reset_records">
+        </Preference>
 
     </PreferenceCategory>
 </PreferenceScreen>

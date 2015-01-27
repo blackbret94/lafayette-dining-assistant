@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/item1"
+        android:title="Upper Farinon"></item>
+    <item 
+        android:id="@+id/item2"
+        android:title="Lower Farinon"></item>
+    <item 
+        android:id="@+id/item3"
+        android:title="Marquis"></item>
+    <item 
+        android:id="@+id/item4"
+        android:title="Gilbert\'s"></item>
+    <item 
+        android:id="@+id/item5"
+        android:title="Simon\'s"></item>
+    <item 
+        android:id="@+id/item6"
+        android:title="Skillman Cafe"></item>
+</menu>
