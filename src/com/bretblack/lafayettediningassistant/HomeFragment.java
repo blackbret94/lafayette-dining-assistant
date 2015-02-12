@@ -1,8 +1,10 @@
 package com.bretblack.lafayettediningassistant;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -17,14 +19,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment{
 	private MainActivity act;
 	private TextView mealCountText;
+	private TextView lastMealText;
 	private int mealCount;
 	private Editor editor;
 	private SharedPreferences sharedPreferences;
+	private String lastMeal;
 	public static final String MEALKEY = "mealKey";
+	public static final String LASTMEALKEY = "lastMealKey";
 	
 	/** The fragment argument representing the section number for this
 	 * fragment. */
@@ -52,6 +58,7 @@ public class HomeFragment extends Fragment{
 		sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
 		editor = sharedPreferences.edit();
 		mealCountText = (TextView) rootView.findViewById(R.id.meal_count_text);
+		lastMealText = (TextView) rootView.findViewById(R.id.last_meal_text);
 		updateMealText();
 		
 		// set up button
@@ -103,6 +110,11 @@ public class HomeFragment extends Fragment{
 			mealCount--;
 			editor.putInt(HomeFragment.MEALKEY, mealCount);
 		    editor.commit();
+		    editor.putString(HomeFragment.LASTMEALKEY, getTime());
+		    
+		    // toast
+		    Toast.makeText(getActivity().getApplicationContext(), "You have used a meal",
+		    		   Toast.LENGTH_SHORT).show();
 			
 		}
 		updateMealText();
@@ -113,7 +125,7 @@ public class HomeFragment extends Fragment{
 	
 	/** Updates the meal count TextView */
 	public void updateMealText(){
-		
+		// update meal count
 		if (sharedPreferences.contains(MEALKEY)){
 			Log.v("Preference found","Preference found");
 			 mealCount = sharedPreferences.getInt(MEALKEY, 20);
@@ -123,6 +135,22 @@ public class HomeFragment extends Fragment{
 		    editor.commit();
 		}
 		
+		// update time of last meal
+		if (sharedPreferences.contains(LASTMEALKEY)){
+			Log.v("Preference found","Preference found");
+			lastMeal = sharedPreferences.getString(LASTMEALKEY, getTime());
+		} else {
+			// put in value
+			editor.putString(HomeFragment.LASTMEALKEY, getTime());
+		    editor.commit();
+		}
+		
 		mealCountText.setText("You have " + mealCount + " meals remaining");
+		lastMealText.setText("Your last meal was used " + lastMeal +".");
+	}
+	
+	/** Gets the current time and date in a user-friendly format */
+	public String getTime(){
+		return Calendar.getInstance().getDisplayName(Calendar.SECOND, Calendar.LONG, Locale.US);
 	}
 }

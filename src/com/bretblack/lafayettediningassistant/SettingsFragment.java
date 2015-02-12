@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
+import android.widget.Toast;
 
 public class SettingsFragment extends PreferenceFragment {
 	private String filename = "conTextSMSBackup";
@@ -42,6 +43,18 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
         
+        // set preference listener for reset records
+        pref = getPreferenceManager().findPreference("reset_records");
+        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                if (preference.getKey().equals("reset_records")){
+                	resetVenue();
+                	return true;
+                }
+                return false;
+            }
+        });
+        
         // set preference listener for export
         /*Preference pref = getPreferenceManager().findPreference("export");
         pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -57,9 +70,19 @@ public class SettingsFragment extends PreferenceFragment {
 	
 	public void resetMeals(){
 		if (sharedPreferences.contains(HomeFragment.MEALKEY)){
+			// reset the meals
 			Editor editor = sharedPreferences.edit();
 			editor.putInt(HomeFragment.MEALKEY, 20);
 		    editor.commit();
+		    
+		    // toast a message
+		    Toast.makeText(getActivity().getApplicationContext(), "Your meals have been reset",
+		    		   Toast.LENGTH_SHORT).show();
 		}
     }
+	
+	public void resetVenue(){
+		Toast.makeText(getActivity().getApplicationContext(), "This feature is under construction",
+	    		   Toast.LENGTH_SHORT).show();
+	}
 }

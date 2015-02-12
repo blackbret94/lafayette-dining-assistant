@@ -31,11 +31,6 @@
 	<string name="reset_records_summary">Reset the recorded venue frequency</string>
 	<string name="schedule_title">Dining Schedule</string>
 	<string name="schedule_content">
-	    Upper Farinon - Open \n 
-	    Lower Farinon - Open \n 
-	    Marquis - Closed \n
-	    Gilbert\'s - Closed  \n
-	    Simon\'s - Open \n 
-	    Skillman Cafe - Open</string>
+	    This feature is under construction</string>
 
 </resources>
