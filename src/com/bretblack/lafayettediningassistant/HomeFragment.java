@@ -1,6 +1,5 @@
 package com.bretblack.lafayettediningassistant;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
@@ -18,10 +17,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeFragment extends Fragment{
-	private Activity act;
+	private MainActivity act;
 	private TextView mealCountText;
 	private int mealCount;
 	private Editor editor;
@@ -48,7 +46,7 @@ public class HomeFragment extends Fragment{
 				false);
 		
 		// save activity
-		act = getActivity();
+		act = (MainActivity)getActivity();
 		
 		// set up shared preferences
 		sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
@@ -57,14 +55,13 @@ public class HomeFragment extends Fragment{
 		updateMealText();
 		
 		// set up button
-		/*Button button = (Button) rootView.findViewById(R.id.use_a_meal_btn);
-        button.setOnClickListener(new OnClickListener() {
-        	
+		Button button = (Button) rootView.findViewById(R.id.use_a_meal_btn);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	useAMeal(view);
                 //Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
 		return rootView;
 	}
@@ -116,6 +113,7 @@ public class HomeFragment extends Fragment{
 	
 	/** Updates the meal count TextView */
 	public void updateMealText(){
+		
 		if (sharedPreferences.contains(MEALKEY)){
 			Log.v("Preference found","Preference found");
 			 mealCount = sharedPreferences.getInt(MEALKEY, 20);

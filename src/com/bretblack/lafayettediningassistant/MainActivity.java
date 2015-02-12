@@ -79,6 +79,15 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		settingsFragment = new SettingsFragment();
 	}
+	
+	/** Uses a meal, calling the method in the associated fragment */
+	public void useAMeal(View v){
+		// get adapter and get fragment
+		SectionsPagerAdapter sectionsAdapter = (SectionsPagerAdapter)mViewPager.getAdapter();
+		HomeFragment hf = (HomeFragment)sectionsAdapter.getItem(0);
+		hf.useAMeal(v);
+		
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

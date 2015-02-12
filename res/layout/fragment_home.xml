@@ -23,6 +23,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/use_a_meal" 
-        android:id="@+id/use_a_meal_btn"
-        android:onClick="useAMeal"></Button>
+        android:id="@+id/use_a_meal_btn"></Button>
 </LinearLayout>
