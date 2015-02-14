@@ -1,6 +1,7 @@
 package com.bretblack.lafayettediningassistant;
 
 import java.util.Locale;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;

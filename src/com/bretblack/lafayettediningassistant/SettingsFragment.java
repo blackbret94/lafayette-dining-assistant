@@ -68,11 +68,23 @@ public class SettingsFragment extends PreferenceFragment {
         });*/
     }
 	
+	/** Gets the current meal plan value */
+	public int getMealPlanValue(){
+		// get shared preferences
+		SharedPreferences sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
+		
+		// get value
+		int val = Integer.parseInt(sharedPreferences.getString("meal_plan_options", "20"));
+		
+		// return
+		return val;
+	}
+	
 	public void resetMeals(){
 		if (sharedPreferences.contains(HomeFragment.MEALKEY)){
 			// reset the meals
 			Editor editor = sharedPreferences.edit();
-			editor.putInt(HomeFragment.MEALKEY, 20);
+			editor.putInt(HomeFragment.MEALKEY, getMealPlanValue());
 		    editor.commit();
 		    
 		    // toast a message

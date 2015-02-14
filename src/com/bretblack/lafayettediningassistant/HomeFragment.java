@@ -1,7 +1,6 @@
 package com.bretblack.lafayettediningassistant;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -151,6 +150,8 @@ public class HomeFragment extends Fragment{
 	
 	/** Gets the current time and date in a user-friendly format */
 	public String getTime(){
-		return Calendar.getInstance().getDisplayName(Calendar.SECOND, Calendar.LONG, Locale.US);
+		//Calendar c = Calendar.getInstance();
+		//return c.getDisplayName(c.SECOND, c.LONG, Locale.US);
+		return java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 	}
 }
