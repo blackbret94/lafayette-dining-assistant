@@ -1,6 +1,7 @@
 package com.bretblack.lafayettediningassistant;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ public class HomeFragment extends Fragment{
 	private Editor editor;
 	private SharedPreferences sharedPreferences;
 	private String lastMeal;
+	private HashMap<String,Integer> venueMap;
 	public static final String MEALKEY = "mealKey";
 	public static final String LASTMEALKEY = "lastMealKey";
 	

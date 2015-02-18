@@ -4,7 +4,7 @@
     <string name="app_name">Lafayette Dining Assistant</string>
     <string name="home_section_title">Home</string>
     <string name="info_section_title">Info</string>
-    <string name="title_section3">Section 3</string>
+    <string name="venue_section_title">Venues</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="meal_plan_option_title">Meal Plan</string>

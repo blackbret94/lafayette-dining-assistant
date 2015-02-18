@@ -1,5 +1,12 @@
 package com.bretblack.lafayettediningassistant;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -20,6 +27,7 @@ import android.view.ViewGroup;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 	private SettingsFragment settingsFragment;
+	private HashMap<String,Integer> venueMap;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -77,6 +85,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		// create preferences
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		settingsFragment = new SettingsFragment();
+		
+		// set up hashmap
+		venueMap = createVenueMap();
+		loadVenueMap();
 	}
 	
 	/** Uses a meal, calling the method in the associated fragment */
@@ -87,6 +99,47 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		hf.useAMeal(v);
 		
 	}
+	
+	/** Create the empty hashmap */
+	public HashMap<String,Integer> createVenueMap(){
+		HashMap<String,Integer> vm = new HashMap<String,Integer>();
+		vm.put("Marquis Hall",0);
+		vm.put("Upper Farinon", 0);
+		vm.put("Lower Farinon", 0);
+		vm.put("Gilbert\'s", 0);
+		vm.put("Simon\'s", 0);
+		vm.put("Skillman Cafe", 0);
+		return vm;
+	}
+	
+	/** Load venue statistics from file */
+	public void loadVenueMap(){
+		try{
+			File file = new File(getDir("data", MODE_PRIVATE), "map");    
+			ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+			venueMap = (HashMap<String,Integer>)inputStream.readObject();
+			inputStream.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			saveVenueMap();
+		}
+	}
+	
+	/** Save venue statistics to file */
+	public void saveVenueMap(){
+		try{
+			File file = new File(getDir("data", MODE_PRIVATE), "map");    
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
+			outputStream.writeObject(venueMap);
+			outputStream.flush();
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,7 +179,12 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 	}
-
+	
+	/** Gets the venue map
+	 * @return venueMap */
+	public HashMap<String,Integer> getVenueMap(){
+		return venueMap;
+	}
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
@@ -146,15 +204,15 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			case 0:
 				return HomeFragment.newInstance(position + 1);
 			case 1:
-				return InfoFragment.newInstance(position + 1);
+				return VenueFragment.newInstance(position + 1);
 			}
-			return PlaceholderFragment.newInstance(position + 1);
+			return InfoFragment.newInstance(position + 1);
 		}
 
 		@Override
 		public int getCount() {
-			// Show 2 total pages.
-			return 2;
+			// Show 3 total pages.
+			return 3;
 		}
 
 		@Override
@@ -164,9 +222,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			case 0:
 				return getString(R.string.home_section_title).toUpperCase(l);
 			case 1:
-				return getString(R.string.info_section_title).toUpperCase(l);
+				return getString(R.string.venue_section_title).toUpperCase(l);
 			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.info_section_title).toUpperCase(l);
 			}
 			return null;
 		}

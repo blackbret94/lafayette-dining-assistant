@@ -47,6 +47,8 @@ public final class R {
         public static final int fragment_home=0x7f030001;
         public static final int fragment_info=0x7f030002;
         public static final int fragment_main=0x7f030003;
+        public static final int fragment_venue=0x7f030004;
+        public static final int venue_list_item=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -68,8 +70,8 @@ public final class R {
         public static final int schedule_content=0x7f060010;
         public static final int schedule_title=0x7f06000f;
         public static final int settings=0x7f060008;
-        public static final int title_section3=0x7f060003;
         public static final int use_a_meal=0x7f06000b;
+        public static final int venue_section_title=0x7f060003;
     }
     public static final class style {
         /** 
