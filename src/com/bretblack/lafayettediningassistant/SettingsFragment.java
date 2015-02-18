@@ -1,13 +1,13 @@
 package com.bretblack.lafayettediningassistant;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -19,17 +19,14 @@ public class SettingsFragment extends PreferenceFragment {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // open database
-        //GlobalDb mApp = (GlobalDb) getActivity().getApplicationContext();
-		//db = mApp.getDbAdapter();
 		
 		// get activity
 		 act = getActivity();
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
-        sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
+        //sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
+		 sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         
         // set preference listener for reset meals
         Preference pref = getPreferenceManager().findPreference("reset_meals");
@@ -54,27 +51,16 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
-        
-        // set preference listener for export
-        /*Preference pref = getPreferenceManager().findPreference("export");
-        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                if (preference.getKey().equals("export")) {
-                    exportFavorites();
-                    return true;
-                }
-                return false;
-            }
-        });*/
     }
 	
 	/** Gets the current meal plan value */
 	public int getMealPlanValue(){
 		// get shared preferences
-		SharedPreferences sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
+		//SharedPreferences sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
 		
 		// get value
 		int val = Integer.parseInt(sharedPreferences.getString("meal_plan_options", "20"));
+		//int val = sharedPreferences.getInt("meal_plan_options", 20);
 		
 		// return
 		return val;

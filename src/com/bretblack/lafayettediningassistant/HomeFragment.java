@@ -3,10 +3,10 @@ package com.bretblack.lafayettediningassistant;
 import java.util.Calendar;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -54,7 +54,9 @@ public class HomeFragment extends Fragment{
 		act = (MainActivity)getActivity();
 		
 		// set up shared preferences
-		sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
+		//sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
+		sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		
 		editor = sharedPreferences.edit();
 		mealCountText = (TextView) rootView.findViewById(R.id.meal_count_text);
 		lastMealText = (TextView) rootView.findViewById(R.id.last_meal_text);
