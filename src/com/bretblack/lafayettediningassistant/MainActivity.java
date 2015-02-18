@@ -51,6 +51,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		
+		// set up hashmap
+		venueMap = createVenueMap();
+		loadVenueMap();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -85,10 +89,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		// create preferences
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 		settingsFragment = new SettingsFragment();
-		
-		// set up hashmap
-		venueMap = createVenueMap();
-		loadVenueMap();
 	}
 	
 	/** Uses a meal, calling the method in the associated fragment */

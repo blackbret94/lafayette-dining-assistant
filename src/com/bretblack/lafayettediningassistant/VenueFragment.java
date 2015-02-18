@@ -32,6 +32,12 @@ public class VenueFragment extends ListFragment {
 		View rootView = inflater.inflate(R.layout.fragment_venue, container,
 				false);
 		
+		updateList(rootView);
+		return rootView;
+	}
+	
+	/** Updates the values of the list */
+	public void updateList(View v){
 		// get hashmap
 		HashMap<String,Integer> venueMap = ((MainActivity)getActivity()).getVenueMap();
 		
@@ -43,7 +49,6 @@ public class VenueFragment extends ListFragment {
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
 	        al.add(pair.getKey()+": " + pair.getValue());
-	        it.remove(); // avoids a ConcurrentModificationException
 	    }
 	    
 	    // sort the array list here later, potentially
@@ -53,7 +58,6 @@ public class VenueFragment extends ListFragment {
 	    //new SimpleAdapter(getActivity(), venueMap, R.layout.fragment_venue, from, to);
 		setListAdapter(adaptor);
 
-		return rootView;
 	}
 
 }

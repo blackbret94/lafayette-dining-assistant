@@ -1,9 +1,15 @@
 package com.bretblack.lafayettediningassistant;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -56,7 +62,6 @@ public class HomeFragment extends Fragment{
 		act = (MainActivity)getActivity();
 		
 		// set up shared preferences
-		//sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
 		sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		
 		editor = sharedPreferences.edit();
@@ -68,11 +73,15 @@ public class HomeFragment extends Fragment{
 		Button button = (Button) rootView.findViewById(R.id.use_a_meal_btn);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+            	inflateVenueMenu();
             	useAMeal(view);
-                //Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+            	((MainActivity)getActivity()).saveVenueMap();
             }
         });
-
+        
+        // get hashmap
+        venueMap = ((MainActivity)getActivity()).getVenueMap();
+        
 		return rootView;
 	}
 	
@@ -80,31 +89,6 @@ public class HomeFragment extends Fragment{
 	public void onResume(){
 		super.onResume();
 		updateMealText();
-	}
-	
-	/** Create menu of dining halls */
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-	                                ContextMenuInfo menuInfo) {
-	    super.onCreateContextMenu(menu, v, menuInfo);
-	    MenuInflater inflater = getActivity().getMenuInflater();
-	    inflater.inflate(R.menu.venue_selection_menu, menu);
-	}
-	
-	/** Handle clicks on the menu */
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    switch (item.getItemId()) {
-	        /*case R.id.edit:
-	            //editNote(info.id);
-	            return true;
-	        case R.id.delete:
-	            //deleteNote(info.id);
-	            return true;*/
-	        default:
-	            return super.onContextItemSelected(item);
-	    }
 	}
 	
 	/** Respond to use a meal button click */
@@ -121,9 +105,6 @@ public class HomeFragment extends Fragment{
 			
 		}
 		updateMealText();
-		// INFLATE MENU OR DIALOG
-		//MenuInflater inflater = act.getMenuInflater();
-		//inflater.inflate(R.menu.venue_selection_menu, menu);
 	}
 	
 	/** Updates the meal count TextView */
@@ -152,10 +133,58 @@ public class HomeFragment extends Fragment{
 		lastMealText.setText("Your last meal was used " + lastMeal +".");
 	}
 	
+	
+	/** Inflates the venue menu */
+	public void inflateVenueMenu(){
+		// get list of venue titles
+		venueMap = ((MainActivity)getActivity()).getVenueMap();
+		final CharSequence[] items = generateVenueNames(venueMap);
+		
+		// instantiate
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		
+		// build alert
+		builder.setTitle("Pick a Venue");
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int item) {
+		    	// get prev value
+		    	int v = venueMap.get(items[item]);
+		    	
+		    	// increment the value
+		    	v++;
+		    	
+		    	// update value
+		    	venueMap.put((String)items[item],v);
+		    }
+		});
+		
+		// create
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
+	/** Gets the names of venues */
+	public CharSequence[] generateVenueNames(HashMap<String,Integer> map){
+		// create array of strings
+		ArrayList<String> al = new ArrayList<String>(venueMap.size());
+		
+		// iterate
+		Iterator it = venueMap.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        al.add((String)pair.getKey());
+	        Log.v("Value", "The value is: " + pair.getValue());
+	    }
+	    
+	    // convert to charsequence
+	    CharSequence[] items = al.toArray(new CharSequence[al.size()]);
+
+	    // return
+		return items;
+	}
+	
 	/** Gets the current time and date in a user-friendly format */
 	public String getTime(){
-		//Calendar c = Calendar.getInstance();
-		//return c.getDisplayName(c.SECOND, c.LONG, Locale.US);
 		return java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 	}
 }
