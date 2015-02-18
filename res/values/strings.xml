@@ -31,6 +31,6 @@
 	<string name="reset_records_summary">Reset the recorded venue frequency</string>
 	<string name="schedule_title">Dining Schedule</string>
 	<string name="schedule_content">
-	    This feature is under construction</string>
+	    This app has been developed by Bret Black.  It is in a very early beta state.\n\nRight now, it is designed to help Lafayette College students manage their meal plans.  It will be expanded into something more general purpose later.\n\nVisit the dining services website\nhttp://lafayette.cafebonappetit.com/\n\nVisit my website\nhttp://bretblack.com</string>
 
 </resources>
