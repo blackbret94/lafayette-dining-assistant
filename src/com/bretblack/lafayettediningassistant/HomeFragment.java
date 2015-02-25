@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment{
 	private MainActivity act;
 	private TextView mealCountText;
 	private TextView lastMealText;
+	private Button mealButton;
 	private int mealCount;
 	private Editor editor;
 	private SharedPreferences sharedPreferences;
@@ -67,6 +68,7 @@ public class HomeFragment extends Fragment{
 		editor = sharedPreferences.edit();
 		mealCountText = (TextView) rootView.findViewById(R.id.meal_count_text);
 		lastMealText = (TextView) rootView.findViewById(R.id.last_meal_text);
+		mealButton = (Button) rootView.findViewById(R.id.use_a_meal_btn);
 		updateMealText();
 		
 		// set up button
@@ -94,6 +96,7 @@ public class HomeFragment extends Fragment{
 	/** Respond to use a meal button click */
 	public void useAMeal(View v){
 		if (mealCount > 0) {
+			// subtract meals
 			mealCount--;
 			editor.putInt(HomeFragment.MEALKEY, mealCount);
 		    editor.commit();
@@ -103,6 +106,9 @@ public class HomeFragment extends Fragment{
 		    Toast.makeText(getActivity().getApplicationContext(), "You have used a meal",
 		    		   Toast.LENGTH_SHORT).show();
 			
+		} else {
+			// reset meals
+			resetMeals();
 		}
 		updateMealText();
 	}
@@ -129,10 +135,46 @@ public class HomeFragment extends Fragment{
 		    editor.commit();
 		}
 		
+		// check if meal count is greater than 0
+		String mealButtonText;
+		
+		if (mealCount > 0){
+			// update text and button color
+			mealButtonText = "Use A Meal";
+			mealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.green_button));
+		} else {
+			// update text and button color
+			mealButtonText = "Reset Meals";
+			mealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_button));
+		}
+		
+		// apply text change to view
+		mealButton.setText(mealButtonText);
 		mealCountText.setText("You have " + mealCount + " meals remaining");
 		lastMealText.setText("Your last meal was used " + lastMeal +".");
 	}
 	
+	public void resetMeals(){
+		if (sharedPreferences.contains(HomeFragment.MEALKEY)){
+			// reset the meals
+			Editor editor = sharedPreferences.edit();
+			editor.putInt(HomeFragment.MEALKEY, getMealPlanValue());
+		    editor.commit();
+		    
+		    // toast a message
+		    Toast.makeText(getActivity().getApplicationContext(), "Your meals have been reset",
+		    		   Toast.LENGTH_SHORT).show();
+		}
+    }
+	
+	/** Gets the current meal plan value */
+	public int getMealPlanValue(){
+		// get value
+		int val = Integer.parseInt(sharedPreferences.getString("meal_plan_options", "20"));
+		
+		// return
+		return val;
+	}
 	
 	/** Inflates the venue menu */
 	public void inflateVenueMenu(){

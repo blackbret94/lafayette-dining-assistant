@@ -55,12 +55,8 @@ public class SettingsFragment extends PreferenceFragment {
 	
 	/** Gets the current meal plan value */
 	public int getMealPlanValue(){
-		// get shared preferences
-		//SharedPreferences sharedPreferences = act.getSharedPreferences("Pref", Context.MODE_PRIVATE);
-		
 		// get value
 		int val = Integer.parseInt(sharedPreferences.getString("meal_plan_options", "20"));
-		//int val = sharedPreferences.getInt("meal_plan_options", 20);
 		
 		// return
 		return val;
