@@ -3,6 +3,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bretblack.lafayettediningassistant.MainActivity" 
+    android:windowBackground="@color/white"
+    android:background="@color/white"
+    tools:context="com.bretblack.mealplanassistant.MainActivity" 
     tools:ignore="MergeRootFrame" />
 

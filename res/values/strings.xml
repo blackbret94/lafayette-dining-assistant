@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Lafayette Dining Assistant</string>
+    <string name="app_name">Meal Plan Assistant</string>
     <string name="home_section_title">Home</string>
     <string name="info_section_title">Info</string>
     <string name="venue_section_title">Venues</string>
@@ -34,12 +34,12 @@
     <string name="main_text_size">Text Size</string>
     <string name="visit_my_website">Visit My Website</string>
     <string name="visit_my_website_summary">For more apps and games by Bret Black</string>
-    
-	
+    <string name="feedback_summary">This app is in beta - your feedback is appreciated</string>
+	<string name="feedback_title">Feedback Form</string>
 	<string name="reset_records_title">Reset Records</string>
 	<string name="reset_records_summary">Reset the recorded venue frequency</string>
 	<string name="schedule_title">Dining Schedule</string>
 	<string name="schedule_content">
 	    This app has been developed by Bret Black.  It is in a very early beta state.\n\nRight now, it is designed to help Lafayette College students manage their meal plans.  It will be expanded into something more general purpose later.\n\nVisit the dining services website\nhttp://lafayette.cafebonappetit.com/\n\nVisit my website\nhttp://bretblack.com</string>
-
+	<color name="white">#FFFFFF</color>
 </resources>

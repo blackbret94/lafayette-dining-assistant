@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory
-            android:title="@string/settings">
-
+    <PreferenceCategory android:title="@string/settings" >
         <EditTextPreference
-                android:key="meal_plan_options"
-                android:title="@string/meal_plan_option_title"
-                android:summary="@string/meal_plan_option_summary" 
-                android:inputType="number" 
-                android:defaultValue="20"/>
-        
-        <Preference
-            android:title="@string/reset_title"
-            android:summary="@string/reset_summary"
-            android:key="reset_meals">
-        </Preference>
-       
+            android:defaultValue="20"
+            android:inputType="number"
+            android:key="meal_plan_options"
+            android:summary="@string/meal_plan_option_summary"
+            android:title="@string/meal_plan_option_title" />
 
-    </PreferenceCategory>
-    
-    <PreferenceCategory
-            android:title="@string/about">
-        
         <Preference
-			 android:title="@string/rate_this_app"
-			 android:summary="@string/rate_this_app_summary"
-			 android:key="homepage">
-			 
-			 <intent
-			 android:action="android.intent.action.VIEW"
-			 android:data="market://details?id=com.bretblack.wesay"
-			 />
-		 </Preference>
-        
-         <Preference
-			 android:title="@string/visit_my_website"
-			 android:summary="@string/visit_my_website_summary"
-			 android:key="homepage">
-			 
-			 <intent
-			 android:action="android.intent.action.VIEW"
-			 android:data="http://www.bretblack.com"
-			 />
-		 </Preference>
-	</PreferenceCategory>
+            android:key="reset_meals"
+            android:summary="@string/reset_summary"
+            android:title="@string/reset_title" >
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/about" >
+        <Preference
+            android:key="homepage"
+            android:summary="@string/feedback_summary"
+            android:title="@string/feedback_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://docs.google.com/forms/d/13LGBy_UuhgyLZLD3NKaKNG4RZVN_CkXogL9GyxlD6ZU/viewform" />
+        </Preference>
+        <Preference
+            android:key="homepage"
+            android:summary="@string/rate_this_app_summary"
+            android:title="@string/rate_this_app" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://details?id=com.bretblack.mealplanassistant" />
+        </Preference>
+        <Preference
+            android:key="homepage"
+            android:summary="@string/visit_my_website_summary"
+            android:title="@string/visit_my_website" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://www.bretblack.com" />
+        </Preference>
+    </PreferenceCategory>
+
 </PreferenceScreen>
+
