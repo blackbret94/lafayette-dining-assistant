@@ -41,7 +41,7 @@ public class SettingsFragment extends PreferenceFragment {
         });
         
         // set preference listener for reset records
-        pref = getPreferenceManager().findPreference("reset_records");
+        /*pref = getPreferenceManager().findPreference("reset_records");
         pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 if (preference.getKey().equals("reset_records")){
@@ -50,7 +50,7 @@ public class SettingsFragment extends PreferenceFragment {
                 }
                 return false;
             }
-        });
+        });*/
     }
 	
 	/** Gets the current meal plan value */

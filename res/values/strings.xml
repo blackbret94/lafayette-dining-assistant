@@ -27,6 +27,15 @@
         <item>14</item>
         <item>20</item>
 	</string-array>
+	<string name="menu_settings">Settings</string>
+    <string name="about">About</string>
+    <string name="rate_this_app">Rate This App</string>
+    <string name="rate_this_app_summary">Reviews and feedback are appreciated!</string>
+    <string name="main_text_size">Text Size</string>
+    <string name="visit_my_website">Visit My Website</string>
+    <string name="visit_my_website_summary">For more apps and games by Bret Black</string>
+    
+	
 	<string name="reset_records_title">Reset Records</string>
 	<string name="reset_records_summary">Reset the recorded venue frequency</string>
 	<string name="schedule_title">Dining Schedule</string>

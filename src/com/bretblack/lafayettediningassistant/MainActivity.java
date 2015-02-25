@@ -7,27 +7,26 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
-import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+//import com.bretblack.lafayettediningassistant.R;
+//import com.bretblack.lafayettediningassistant.*;
 
-public class MainActivity extends Activity implements ActionBar.TabListener {
+public class MainActivity extends Activity {
 	private SettingsFragment settingsFragment;
 	private HashMap<String,Integer> venueMap;
+	private HomeFragment hf;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -36,22 +35,37 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	 * becomes too memory intensive, it may be best to switch to a
 	 * {@link android.support.v13.app.FragmentStatePagerAdapter}.
 	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	//SectionsPagerAdapter mSectionsPagerAdapter;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager mViewPager;
+	//ViewPager mViewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// set up fragments
+		if (savedInstanceState == null) {
+			// create fragment
+			hf = new HomeFragment();
+			
+			// add
+			getFragmentManager().beginTransaction()
+					.add(R.id.container, hf).commit();
+		}
+		
+		// create preferences
+				PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+				settingsFragment = new SettingsFragment();
 
 		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		//final ActionBar actionBar = getActionBar();
+		//actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
+		/* REMOVED TABS
 		// set up hashmap
 		venueMap = createVenueMap();
 		loadVenueMap();
@@ -84,18 +98,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			actionBar.addTab(actionBar.newTab()
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
-		}
-		
-		// create preferences
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
-		settingsFragment = new SettingsFragment();
+		}*/
 	}
 	
 	/** Uses a meal, calling the method in the associated fragment */
 	public void useAMeal(View v){
 		// get adapter and get fragment
-		SectionsPagerAdapter sectionsAdapter = (SectionsPagerAdapter)mViewPager.getAdapter();
-		HomeFragment hf = (HomeFragment)sectionsAdapter.getItem(0);
+		//SectionsPagerAdapter sectionsAdapter = (SectionsPagerAdapter)mViewPager.getAdapter();
+		//HomeFragment hf = (HomeFragment)sectionsAdapter.getItem(0);
 		hf.useAMeal(v);
 		
 	}
@@ -162,8 +172,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	public void onTabSelected(ActionBar.Tab tab,
+	//Override
+	/*public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
@@ -178,7 +188,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	@Override
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
-	}
+	}*/
 	
 	/** Gets the venue map
 	 * @return venueMap */
@@ -189,7 +199,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	/*public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -228,39 +238,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 			}
 			return null;
 		}
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-	}
+	}*/
 
 }

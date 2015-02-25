@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment{
 		Button button = (Button) rootView.findViewById(R.id.use_a_meal_btn);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	inflateVenueMenu();
+            	//inflateVenueMenu();
             	useAMeal(view);
             	((MainActivity)getActivity()).saveVenueMap();
             }

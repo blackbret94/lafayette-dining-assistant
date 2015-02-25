@@ -5,12 +5,11 @@
     <PreferenceCategory
             android:title="@string/settings">
 
-        <ListPreference
+        <EditTextPreference
                 android:key="meal_plan_options"
                 android:title="@string/meal_plan_option_title"
                 android:summary="@string/meal_plan_option_summary" 
-                android:entries="@array/meal_plan_options"
-                android:entryValues="@array/meal_plan_options"
+                android:inputType="number" 
                 android:defaultValue="20"/>
         
         <Preference
@@ -18,12 +17,33 @@
             android:summary="@string/reset_summary"
             android:key="reset_meals">
         </Preference>
-        
-        <Preference
-            android:title="@string/reset_records_title"
-            android:summary="@string/reset_records_summary"
-            android:key="reset_records">
-        </Preference>
+       
 
     </PreferenceCategory>
+    
+    <PreferenceCategory
+            android:title="@string/about">
+        
+        <Preference
+			 android:title="@string/rate_this_app"
+			 android:summary="@string/rate_this_app_summary"
+			 android:key="homepage">
+			 
+			 <intent
+			 android:action="android.intent.action.VIEW"
+			 android:data="market://details?id=com.bretblack.wesay"
+			 />
+		 </Preference>
+        
+         <Preference
+			 android:title="@string/visit_my_website"
+			 android:summary="@string/visit_my_website_summary"
+			 android:key="homepage">
+			 
+			 <intent
+			 android:action="android.intent.action.VIEW"
+			 android:data="http://www.bretblack.com"
+			 />
+		 </Preference>
+	</PreferenceCategory>
 </PreferenceScreen>
