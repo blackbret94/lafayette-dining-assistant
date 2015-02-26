@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment{
 	private Editor editor;
 	private SharedPreferences sharedPreferences;
 	private String lastMeal;
+	private ArrayList<String> mealList;
 	private HashMap<String,Integer> venueMap;
 	public static final String MEALKEY = "mealKey";
 	public static final String LASTMEALKEY = "lastMealKey";
